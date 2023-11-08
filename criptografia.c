@@ -3,7 +3,7 @@
 #include <string.h>
 
 int get_line(FILE* file, char* buffer);
-void criptografy(char* buffer, int size, int key, FILE* file);
+void criptografy(char* buffer, size_t size, int key, FILE* file);
 
 int main() {
     char file_name[50];
@@ -14,10 +14,10 @@ int main() {
     fgets(file_name, 50, stdin);
     file_name[strlen(file_name) - 1] = '\0';
 
-    FILE* fd = fopen(file_name, "r+");
-    FILE* answer = fopen("decrypt.txt", "w");
+    FILE* fd = fopen(file_name, "r");
+    FILE* answer = fopen("criptografy.txt", "w");
 
-    if(fd == NULL || answer == NULL) return 1;
+    if(fd == NULL || answer == NULL) {printf("Error! Cannot open the file."); return 1;}
 
     printf("Operation letters\n\tencrypt --> e\n\tdecrypt --> d\n--> ");
     scanf("%c", &operation);
@@ -25,10 +25,10 @@ int main() {
     printf("Type the key: ");
     scanf("%i", &key);
 
-
     while(!feof(fd)) {
         char line[500] = {0};
         int i = get_line(fd, line);
+        printf("line: %s\n", line);
         if(operation == 'e') {
             criptografy(line, i, key, answer);
         }else if(operation == 'd') {
@@ -47,23 +47,26 @@ int main() {
 // get_line != fread
 // fread reads more than one line, get_line reads only one line a time.
 int get_line(FILE* file, char* buffer) {
-    char c; 
-    int i = 0;
+    size_t i = 0;
 
-    while((c = getc(file)) != '\n' && i <= strlen(buffer)) {
+    char c = getc(file); 
+    while(c != '\n' && c != '\r' && !feof(file)) {
         buffer[i++] = c;
+        c = getc(file);
     }
 
     return i;
 }
 
-void criptografy(char* buffer, int size, int key, FILE* file) {
-    while(size >= 0) {
-        printf("%c\n", buffer[size-1]);
-        buffer[size-1] = buffer[size-1] + key;
-        size--;
-        printf("%c\n", buffer[size-1]);
+void criptografy(char* buffer, size_t size, int key, FILE* file) {
+    char* lf = "\n";
+
+    for(size_t i = 0; i<size; i++) {
+        buffer[i] += key;
     }
 
-    fwrite(buffer, sizeof(char), strlen(buffer), file);
+    printf("line encrypted: %s\n", buffer);
+
+    fwrite(buffer, sizeof(char), size, file);
+    fwrite(lf, sizeof(char), 1, file);
 }
