@@ -5,6 +5,7 @@ The code for this project uses a mix of the encoding technique called Caesar Cip
 
 ### Project Specifications
 - Programming Language: C
+- Letter standard code: ASCII (may not work with other standards)
 
 ### Final observations
 This is a beggining project made for educational and entertainment purposes.
