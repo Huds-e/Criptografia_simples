@@ -1,2 +1,10 @@
-# Criptografia_simples
-Projeto de criptografia de arquivo simples
+# Basic_Criptografy
+
+### Introduction
+The code for this project uses a mix of the encoding technique called Caesar Cipher and a inverse organization of the word to be encoded to encrypt a text file with a certain key given by the user.
+
+### Project Specifications
+- Programming Language: C
+
+### Final observations
+This is a beggining project made for educational and entertainment purposes.
