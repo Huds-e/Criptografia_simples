@@ -23,20 +23,20 @@ int main() {
     fgets(file_name, 50, stdin);
     file_name[strlen(file_name) - 1] = '\0';
 
-    if(strcmp(file_name, "criptografy.txt") == 0) {printf("Cannot use the criptografy file to encode/decode text.\n"); return 1;}
+    if(strcmp(file_name, "criptografy.txt") == 0) {printf("Cannot use the criptografy file to encode/decode text.\n"); system("pause"); return 1;}
 
     FILE* fd = fopen(file_name, "r");
     FILE* answer = fopen("criptografy.txt", "w"); // this is a file where the encoded text will be storage.
 
-    if(fd == NULL || answer == NULL) {printf("Error! Cannot open the file."); return 1;}
+    if(fd == NULL || answer == NULL) {printf("Error! Cannot open the file.\n"); system("pause"); return 1;}
 
     printf("Operation letters\n\tencrypt --> e\n\tdecrypt --> d\n--> ");
     scanf("%c", &operation);
 
-    printf("Type the key (key must bee between 1 and 120): ");
+    printf("Type the key (key must be between 1 and 120): ");
     scanf("%i", &key);
 
-    if(key > 120) {printf("Invalid Key.\n"); return 1;}
+    if(key > 120) {printf("Invalid Key.\n"); system("pause"); return 1;}
 
     // loop for encrypt/decrypt all the lines of the file.
     while(!feof(fd)) {
@@ -51,6 +51,7 @@ int main() {
         }
         else {
             printf("Invalid mode, try again.\n");
+            system("pause");
             return 1;
         }
     }
