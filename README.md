@@ -9,4 +9,4 @@ The code for this project uses a mix of the encoding technique called Caesar Cip
 
 ### Final observations
 - The file wich will be ecrypted/decrypted must be in the same directory of the .exe file
-This is a beggining project made for educational and entertainment purposes.
+- This is a beggining project made for educational and entertainment purposes.
